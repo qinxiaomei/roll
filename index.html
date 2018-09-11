@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		padding:0;
+		margin:0;
+	}
+
+   	body{
+		background:url(images/dianming.gif) no-repeat;
+		background-size:cover;
+		width: 100%;
+     	height: 100%;
+	}
+     .dabox{
+     	margin:0 auto;
+     	margin-top: 19%;
+     	width: 300px;
+     	height: 200px;
+     	background: url(images/bj1.png) center;
+     	background-size:;
+     	text-align:center;
+     	padding: 0 20px 0 20px;
+     	box-shadow: 1px 10px 10px #525050;
+     }
+     .dabox .box ,.btn{
+     	width: 200px;
+     	height: 120px;
+     	margin:0 auto;
+     	margin-top: 19%;
+     
+     	text-align: center;
+     	line-height: 120px;
+     	font-size: 60px;
+
+     }
+     .dabox .btn{
+     	color:#fcf9f9;
+     	cursor: pointer;
+     	margin:0 auto;
+     	width: 200px;
+     	line-height: 80px;
+     	height: 80px;
+     	padding: 0 20px 0 20px;
+     	background-image: url(images/318751-130P40S61969.png);
+     	background-size: cover;
+     }
+    /*  当手机状态时候的样式 */
+     @media (max-width: 700px) {
+    .dabox .box ,.btn{
+     	width: 100px;
+     	height: 60px;
+     	margin:0 auto;
+     	margin-top: 19%;
+     	text-align: center;
+     	line-height: 60px;
+     	font-size: 30px;
+
+     }
+    .dabox .btn{
+     	width: 100px;
+     	line-height: 35px;
+     	font-size: 20px;
+     	height: 35px;
+     	padding: 0 0px 0 0px;
+     	background-image: none;
+     	background-color: #4459a3;
+     	linear-gradient:(45deg, #6c7eac, #4459a3); /* Safari 5.1 - 6.0 */
+     }
+     .dabox{
+     	margin:0 auto;
+     	margin-top: 19%;
+     	width: 150px;
+     	height: 100px;
+     	background: none;
+     	background-color: #dc0225;
+     	background-size: cover;
+     	text-align:center;
+     	padding: 0 0px 0 0px;
+     	
+     	box-shadow: none ;
+     	
+     }
+   }
+	</style>
+</head>
+<body>
+	<div class="dabox">
+		<div class="box">点名</div>
+		<div class="btn">开始</div>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+<script type="text/javascript">
+	(function(window,document){
+		/*班级名册*/
+		var arr = ["陈昌业",
+"陈海军",
+"陈善发",
+"黄群博",
+"蓝于波",
+"劳宗彬",
+"李铮",
+"梁鸿鹏",
+"林树卿",
+"吕泽成",
+"农镇涛",
+"欧志豪",
+"潘康",
+"饶伟航",
+"苏广昭",
+"王飞鸿",
+"王起涛",
+"韦城宇",
+"韦书俭",
+"徐奋发",
+"许泽阳",
+"张达标",
+"赵龙发",
+"陈超记",
+"陈冬梅",
+"董春",
+"黄芳静",
+"蒋明芳",
+"梁玲雪",
+"刘海凤",
+"刘静桂",
+"蒙素雯",
+"秦小妹",
+"覃洁",
+"吴小盈",
+"杨宝莉",
+"杨小文",
+"梁美玲"];
+		//封装一个定时出现随机名字的定时器
+	    timecall = setInterval(function(){
+			var num = Math.round(Math.random()*(arr.length-1));//因为arr是从0开始胡所以arr.length-1 此步骤取得0-arr.lenght-1的四舍五入的整数
+		    $(".box").html(arr[num]);
+		}, 50);
+		//清除定时器
+		clearInterval(timecall)
+		//注册界面上的点击事件
+		$(".btn").toggle(
+			function kaishi(){
+			clearInterval(timecall);
+			$(".btn").html("停");
+			//下面是直接复制上面封装的随机数
+			 timecall = setInterval(function(){
+			var num = Math.round(Math.random()*(arr.length-1));//因为arr是从0开始胡所以arr.length-1 此步骤取得0-arr.lenght-1的四舍五入的整数
+		    $(".box").html(arr[num]);
+		}, 50);
+		},
+		//下面是toggle时候的第二个函数 这种用法只有jq的前几个版本才支持
+		function jieshu(){
+			clearInterval(timecall);
+            $(".btn").html("开始")
+			
+		})
+      //注册界面上的keycode==32的事件
+      var biaoji = false ;
+      $(document).keydown(
+      function(e){   
+      //处理兼容性 
+      if(!e) var e = window.event;
+      //判断其输入的是空格键
+      if(e.keyCode==32){
+      	//利用biaoji来得到true/false 来改变事件的方向
+      	biaoji=!biaoji
+        if(biaoji == true){
+      	clearInterval(timecall);
+			clearInterval(timecall);
+			$(".btn").html("停");
+			////下面是直接复制上面封装的随机数
+			 timecall = setInterval(function(){
+			var num = Math.round(Math.random()*(arr.length-1));//因为arr是从0开始胡所以arr.length-1 此步骤取得0-arr.lenght-1的四舍五入的整数
+		    $(".box").html(arr[num]);
+		}, 50);
+		}else{
+			clearInterval(timecall);
+            $(".btn").html("开始")
+		}
+      	}
+      })
+	})(window,document)
+</script>
+</html>
